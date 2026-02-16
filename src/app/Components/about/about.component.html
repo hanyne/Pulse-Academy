@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>À Propos - Pulse Academy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Formation professionnelle, Pulse Academy" name="keywords">
+    <meta content="Centre de formation privée agréé par l'État, proposant des formations en pâtisserie, couture, cosmétique, parfumerie, maintenance et langues." name="description">
+
+    <!-- Font Awesome (assumed to be used in the Home page for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap CSS (assumed dependency for Home page styling) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts (to match the typography style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styling (matching Home page) */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Jumbotron (matching Home page) */
+        .jumbotron {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 90px;
+        }
+
+        .jumbotron h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Section Styling (matching Home page) */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h6 {
+            display: inline-block;
+            position: relative;
+            text-transform: uppercase;
+            color: #007bff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+
+        .section-title h6::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: #007bff;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .about-content img {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-content img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Mission Section (matching Home page's Feature section style) */
+        .mission-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            margin: 90px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .mission-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .mission-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Team Section (matching Home page's Team section) */
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .team-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-item h5 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 15px 0 5px;
+        }
+
+        .team-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .team-item .social-icons a {
+            color: #007bff;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .team-item .social-icons a:hover {
+            color: #0056b3;
+        }
+
+        /* Footer Styling (matching Home page) */
+        .overlay-top {
+            position: relative;
+            background-color: #1a1a1a;
+            padding: 40px 0;
+        }
+
+        .overlay-top .navbar-brand h1 {
+            color: #fff;
+        }
+
+        .overlay-top p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .overlay-top h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .overlay-top a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-top a:hover {
+            color: #007bff;
+        }
+
+        .overlay-top .input-group input {
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .overlay-top .input-group .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .overlay-top .input-group .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .border-top {
+            border-color: rgba(256, 256, 256, 0.1) !important;
+        }
+
+        /* Back to Top Button (matching Home page) */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .jumbotron h1 {
+                font-size: 2rem;
+            }
+
+            .jumbotron p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-content img {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start (from Home page) -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+216 58 837 712</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>contact@pulseacademy.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start (from Home page) -->
+<app-navbar></app-navbar>
+    <!-- Navbar End -->
+
+    <!-- Header Start (matching Home page jumbotron style) -->
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom">
+        <div class="container text-center my-5 py-5">
+            <h1 class="text-white mt-4 mb-4">À Propos d'Pulse Academy</h1>
+            <h1 class="text-white display-1 mb-5">Votre Partenaire de Formation</h1>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- About Section (matching Home page About section style) -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" style="object-fit: cover; border-radius: 10px;" alt="Pulse Academy">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-title position-relative mb-4">
+                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">À Propos de Nous</h6>
+                        <h1 class="display-4">Un Centre de Formation Privée Agréé</h1>
+                    </div>
+                    <p>Pulse Academy est un centre de formation privée agréé par l'État sous le numéro 8114619. Nous proposons une large gamme de formations professionnelles pour répondre à vos besoins, allant de la pâtisserie à la maintenance GSM, en passant par l’apprentissage des langues. Nos programmes sont conçus pour vous offrir des compétences pratiques et recherchées sur le marché du travail.</p>
+                    <p>Avec des formateurs qualifiés et des méthodes d’enseignement modernes, nous nous engageons à vous accompagner vers le succès dans votre carrière.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Mission Section (matching Home page Feature section style) -->
+    <div class="container-fluid bg-image" style="margin: 90px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 my-5 pt-5 pb-lg-5">
+                    <div class="section-title position-relative mb-4">
+                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Notre Mission</h6>
+                        <h1 class="display-4">Pourquoi Choisir Pulse Academy ?</h1>
+                    </div>
+                    <p class="mb-4 pb-2">Nous nous engageons à offrir des formations de qualité qui allient théorie et pratique, afin de préparer nos étudiants à relever les défis professionnels d’aujourd’hui et de demain. Que vous soyez débutant ou en quête de perfectionnement, Pulse Academy est là pour vous.</p>
+                    <div class="d-flex mb-3">
+                        <div class="btn-icon bg-primary mr-4">
+                            <i class="fa fa-2x fa-graduation-cap text-white"></i>
+                        </div>
+                        <div class="mt-n1">
+                            <h4>Formateurs Qualifiés</h4>
+                            <p>Nos formateurs sont des experts dans leurs domaines, prêts à vous accompagner dans votre apprentissage.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="btn-icon bg-secondary mr-4">
+                            <i class="fa fa-2x fa-certificate text-white"></i>
+                        </div>
+                        <div class="mt-n1">
+                            <h4>Certifications Reconnues</h4>
+                            <p>Obtenez des certificats reconnus pour booster votre carrière professionnelle.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="btn-icon bg-warning mr-4">
+                            <i class="fa fa-2x fa-book-reader text-white"></i>
+                        </div>
+                        <div class="mt-n1">
+                            <h4>Formations Pratiques</h4>
+                            <p class="m-0">Nos cours sont conçus pour vous offrir des compétences directement applicables.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" style="object-fit: cover; border-radius: 10px;" alt="Mission">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mission End -->
+
+    <!-- Team Section (matching Home page Team section style) -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative mb-5">
+                <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Formateurs</h6>
+                <h1 class="display-4">Rencontrez Nos Formateurs</h1>
+            </div>
+            <div class="owl-carousel team-carousel position-relative" style="padding: 0 30px;">
+                <div class="team-item">
+                    <img class="img-fluid w-100" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Formateur">
+                    <div class="bg-light text-center p-4">
+                        <h5 class="mb-3">Marie Dupont</h5>
+                        <p class="mb-2">Pâtisserie et Cuisine</p>
+                        <div class="d-flex justify-content-center social-icons">
+                            <a class="mx-1 p-1" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-item">
+                    <img class="img-fluid w-100" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Formateur">
+                    <div class="bg-light text-center p-4">
+                        <h5 class="mb-3">Amel Ben Salah</h5>
+                        <p class="mb-2">Couture et Modélisme</p>
+                        <div class="d-flex justify-content-center social-icons">
+                            <a class="mx-1 p-1" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-item">
+                    <img class="img-fluid w-100" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Formateur">
+                    <div class="bg-light text-center p-4">
+                        <h5 class="mb-3">Ahmed Trabelsi</h5>
+                        <p class="mb-2">Langues</p>
+                        <div class="d-flex justify-content-center social-icons">
+                            <a class="mx-1 p-1" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+    <!-- Footer Start (from Home page) -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Pulse Academy</h1>
+                    </a>
+                    <p class="m-0">Centre de formation privée agréé par l'État sous le numéro 8114619. Nous offrons des formations professionnelles dans divers domaines pour vous aider à atteindre vos objectifs de carrière.</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Votre Adresse Email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">S'inscrire</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Contactez-nous</h3>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Tunis, Tunisie</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+216 58 837 712</p>
+                    <p><i class="fa fa-envelope mr-2"></i>contact@pulseacademy.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Nos Formations</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pâtisserie et Cuisine</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Couture et Modélisme</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Formation de Parfum</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Maintenance GSM</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Langues</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Liens Rapides</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Politique de Confidentialité</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Conditions Générales</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQ</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Aide et Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright © <a class="text-white" href="#">Pulse Academy</a>. Tous droits réservés.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <p class="m-0">Conçu par <a class="text-white" href="https://htmlcodex.com">HTML Codex</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top (from Home page) -->
+    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries (assumed from Home page) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

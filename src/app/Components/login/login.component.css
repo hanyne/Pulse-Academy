@@ -1,0 +1,376 @@
+/* login.component.css */
+
+/* Full page layout */
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+  }
+  
+  /* Left Section: Image with Overlay */
+  .login-image {
+    flex: 1;
+    background-image: url('../../../assets/img/education.jpg'); /* Replace with your education-themed image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  
+  .login-image .overlay {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.2) 50%, transparent); /* Gradient overlay */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content towards the top */
+    padding-top: 150px; /* Add padding to fine-tune the position */
+  }
+  
+  .login-image h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .login-image p {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  
+  /* Right Section: Form Container */
+  .login-form-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .form-wrapper {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .form-wrapper h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Form Styling */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    text-align: left;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .input-wrapper {
+    position: relative;
+  }
+  
+  .input-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+    font-size: 1.2rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+  
+  /* Error Messages */
+  .error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-align: left;
+  }
+  
+  /* Submit Button */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 12px;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .btn-primary[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Register Link */
+  .register-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .login-page {
+      flex-direction: column;
+    }
+  
+    .login-image {
+      height: 200px;
+    }
+  
+    .login-image h1 {
+      font-size: 1.5rem;
+    }
+  
+    .login-image p {
+      font-size: 1rem;
+    }
+  
+    .login-image .overlay {
+      padding-top: 30px; /* Adjust padding for smaller screens */
+    }
+  
+    .login-form-container {
+      padding: 20px;
+    }
+  
+    .form-wrapper {
+      padding: 20px;
+    }
+  }/* login.component.css (add at the end) */
+
+/* Modern Form Styling */
+.form-wrapper {
+    background: rgba(255, 255, 255, 0.9); /* Slight transparency for glassmorphism */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    padding: 40px; /* Increased padding for a more spacious look */
+  }
+  
+  .form-wrapper h2 {
+    font-size: 2.2rem; /* Slightly larger title */
+    color: #1a1a1a; /* Darker color for contrast */
+    margin-bottom: 30px; /* More spacing below the title */
+    position: relative;
+    display: inline-block;
+  }
+  
+  .form-wrapper h2::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: #007bff;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  
+  .login-form {
+    gap: 20px; /* Increased spacing between form elements */
+  }
+  
+  /* Form Group and Input Styling */
+  .form-group {
+    position: relative;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    background-color: #f8f9fa; /* Light background for inputs */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .input-wrapper:hover {
+    background-color: #e9ecef; /* Slightly darker on hover */
+  }
+  
+  .input-wrapper i {
+    color: #007bff;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+  }
+  
+  .input-wrapper:hover i {
+    color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .form-control {
+    background: transparent; /* Transparent background to show the input-wrapper's background */
+    border: none; /* Remove default border */
+    border-bottom: 2px solid #007bff; /* Underline effect */
+    border-radius: 0; /* Remove default border-radius */
+    padding: 12px 12px 12px 45px; /* Adjusted padding for larger icon */
+    font-size: 1.1rem; /* Slightly larger font */
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-bottom-color: #0056b3; /* Darker blue on focus */
+    box-shadow: none; /* Remove default shadow */
+    background: rgba(0, 123, 255, 0.05); /* Subtle background tint on focus */
+  }
+  
+  /* Placeholder Styling */
+  .form-control::placeholder {
+    color: #999;
+    font-style: italic;
+    transition: opacity 0.3s ease;
+  }
+  
+  .form-control:focus::placeholder {
+    opacity: 0; /* Hide placeholder on focus */
+  }
+  
+  /* Error Messages */
+  .error {
+    font-size: 0.9rem;
+    background: rgba(220, 53, 69, 0.1); /* Light red background for errors */
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  
+  /* Submit Button */
+  .btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 25px; /* Rounded button */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Glowing shadow */
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #003d82); /* Darker gradient on hover */
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5); /* Enhanced glow on hover */
+    transform: translateY(-3px); /* Slightly more lift */
+  }
+  
+  .btn-primary:active {
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2); /* Reduced shadow on click */
+  }
+  
+  .btn-primary[disabled] {
+    background: #cccccc;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  /* Register Link */
+  .register-link {
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .register-link a {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  
+  .register-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .register-link a:hover::after {
+    width: 100%; /* Underline effect on hover */
+  }
+  
+  .register-link a:hover {
+    color: #0056b3;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .form-wrapper {
+      padding: 25px; /* Reduced padding for smaller screens */
+    }
+  
+    .form-wrapper h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+  
+    .form-control {
+      font-size: 1rem;
+      padding: 10px 10px 10px 40px;
+    }
+  
+    .btn-primary {
+      padding: 12px;
+      font-size: 1rem;
+    }
+  }

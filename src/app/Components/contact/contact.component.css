@@ -1,0 +1,21 @@
+.contact-form .form-control {
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.success {
+    color: green;
+    font-size: 1em;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.contact-form {
+    padding: 20px;
+}

@@ -1,0 +1,75 @@
+<!-- login.component.html -->
+<div class="login-page">
+    <!-- Left Section: Image with Overlay -->
+    <div class="login-image">
+      <div class="overlay">
+        <h1>Pulse Academy</h1>
+        <p>Votre centre de formation pour un avenir brillant</p>
+      </div>
+    </div>
+  
+    <!-- Right Section: Login Form -->
+    <div class="login-form-container">
+      <div class="form-wrapper">
+        <h2>Connexion</h2>
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="email" 
+                class="form-control"
+                required 
+                email
+                placeholder="Entrez votre email"
+                #emailInput="ngModel">
+            </div>
+            <div *ngIf="loginForm.submitted && emailInput.errors" class="error">
+              <div *ngIf="emailInput.errors['required']">L'email est requis</div>
+              <div *ngIf="emailInput.errors['email']">Email invalide</div>
+            </div>
+          </div>
+  
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                [(ngModel)]="password" 
+                class="form-control"
+                required
+                minlength="6"
+                placeholder="Entrez votre mot de passe"
+                #passwordInput="ngModel">
+            </div>
+            <div *ngIf="loginForm.submitted && passwordInput.errors" class="error">
+              <div *ngIf="passwordInput.errors['required']">Le mot de passe est requis</div>
+              <div *ngIf="passwordInput.errors['minlength']">Minimum 6 caractères</div>
+            </div>
+          </div>
+  
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+            Se connecter
+          </button>
+  
+          <!-- Link to Register -->
+          <p class="register-link">
+            Pas de compte? <a routerLink="/register">Inscrivez-vous</a>
+          </p>
+  
+          <!-- Error Message -->
+          <div class="error" *ngIf="error">{{ error }}</div>
+        </form>
+      </div>
+    </div>
+  </div>

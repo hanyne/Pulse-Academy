@@ -1,0 +1,160 @@
+/* ───────────────────────────────────────────────
+   FORMULAIRE AJOUT / MODIFICATION - VERSION PRO
+─────────────────────────────────────────────── */
+
+.create-user-card,
+.modal-content {
+  background: #ffffff;                  /* blanc opaque */
+  border: 1px solid #e2e8f0;            /* bordure subtile gris clair */
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.08),
+    0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  padding: 2.2rem;
+  color: #1f2937;                       /* texte principal presque noir */
+}
+
+.create-user-card h2,
+.modal-content h2 {
+  color: #111827;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+  letter-spacing: -0.025em;
+}
+
+/* Grid 2 colonnes */
+.user-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2rem;
+}
+
+.user-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.user-form .form-group.full-width,
+.user-form .form-group:has(textarea),
+.user-form .form-group:has(input[type="file"]),
+.user-form .modal-actions {
+  grid-column: span 2;
+}
+
+.user-form label {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.35rem;
+}
+
+/* Inputs & Select */
+.form-control,
+select.form-control,
+textarea.form-control {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.8rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 0.97rem;
+  color: #111827;                     /* texte noir */
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.18),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+/* Icones dans input */
+.input-group {
+  position: relative;
+}
+
+.input-group i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/* Select rôle - style pro */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+}
+
+/* Photo preview */
+.photo-preview img {
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  max-width: 160px;
+  margin-top: 0.6rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Boutons */
+.user-form .btn-primary,
+.modal-actions .btn-primary {
+  background-color: #2563eb;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+}
+
+.user-form .btn-primary:hover,
+.modal-actions .btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.modal-actions .btn-cancel {
+  background: #6b7280;
+  color: white;
+}
+
+.modal-actions .btn-cancel:hover {
+  background: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .user-form {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+}

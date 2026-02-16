@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+  
+  <!-- Main Content -->
+  <div class="p-6">
+    <div class="max-w-7xl mx-auto mb-6">
+      <a href="/dash" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+        <i class="fas fa-arrow-left mr-2"></i> Retour au Tableau de Bord
+      </a>
+    </div>
+    <div class="app-container max-w-7xl mx-auto">
+      <div class="content-wrapper flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+        <!-- Stats Card (Sidebar-like) -->
+        <div class="stats-card bg-white rounded-lg shadow-md p-6 w-full md:w-1/3">
+          <h3 class="stats-title text-xl font-semibold mb-4 text-gray-800">Résumé</h3>
+          <div class="stats-content space-y-4">
+            <div class="stat-item flex justify-between">
+              <p class="stat-label text-gray-600">Formation</p>
+              <p class="stat-value font-medium">{{ course?.title || 'Chargement...' }}</p>
+            </div>
+            <div class="stat-item flex justify-between">
+              <p class="stat-label text-gray-600">Total Heures</p>
+              <p class="stat-value font-medium">{{ getTotalScheduledHours() | number:'1.1-1' }} h</p>
+            </div>
+            <div class="stat-item flex justify-between">
+              <p class="stat-label text-gray-600">Séances</p>
+              <p class="stat-value font-medium">{{ schedule.length }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="main-card bg-white rounded-lg shadow-md p-6 w-full md:w-2/3">
+          <h2 class="main-title text-2xl font-semibold mb-6 text-gray-800">Gestion du Planning</h2>
+
+          <!-- Success/Error Messages -->
+          <div *ngIf="successMessage" class="message p-4 rounded-md mb-6 bg-green-100 text-green-700">
+            <p class="message-text">{{ successMessage }}</p>
+          </div>
+          <div *ngIf="errorMessage" class="message p-4 rounded-md mb-6 bg-red-100 text-red-700">
+            <p class="message-text">{{ errorMessage }}</p>
+          </div>
+
+          <!-- Schedule Table -->
+          <div class="table-container overflow-x-auto">
+            <table class="schedule-table w-full text-left">
+              <thead class="bg-gray-200">
+                <tr>
+                  <th class="table-header p-3 cursor-pointer hover:bg-gray-300" (click)="sortBy('day')">Jour</th>
+                  <th class="table-header p-3 cursor-pointer hover:bg-gray-300" (click)="sortBy('date')">Date</th>
+                  <th class="table-header p-3 cursor-pointer hover:bg-gray-300" (click)="sortBy('startTime')">Début</th>
+                  <th class="table-header p-3 cursor-pointer hover:bg-gray-300" (click)="sortBy('endTime')">Fin</th>
+                  <th class="table-header p-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let entry of schedule; let i = index" class="table-row border-b hover:bg-gray-50">
+                  <td class="table-cell p-3">{{ entry.day }}</td>
+                  <td class="table-cell p-3">{{ entry.date || 'Non spécifiée' }}</td>
+                  <td class="table-cell p-3">{{ entry.startTime }}</td>
+                  <td class="table-cell p-3">{{ entry.endTime }}</td>
+                  <td class="table-cell p-3">
+                    <button type="button" class="delete-btn bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" (click)="removeScheduleEntry(i)">
+                      <i class="fas fa-trash mr-1"></i> Supprimer
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="schedule.length === 0">
+                  <td colspan="5" class="table-cell p-3 text-center text-gray-500">Aucun planning défini.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Form with Floating Labels -->
+          <div class="form-grid grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="form-group">
+              <label for="scheduleDay" class="form-label block text-sm font-medium text-gray-700">Jour</label>
+              <select id="scheduleDay" [(ngModel)]="newScheduleEntry.day" class="form-input w-full p-2 border rounded-md focus:ring focus:ring-blue-200" required>
+                <option value="" disabled>Sélectionner un jour</option>
+                <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="scheduleDate" class="form-label block text-sm font-medium text-gray-700">Date (optionnel)</label>
+              <input type="date" id="scheduleDate" [(ngModel)]="newScheduleEntry.date" (change)="updateDayFromDate()" class="form-input w-full p-2 border rounded-md focus:ring focus:ring-blue-200">
+            </div>
+            <div class="form-group">
+              <label for="scheduleStartTime" class="form-label block text-sm font-medium text-gray-700">Début</label>
+              <input type="time" id="scheduleStartTime" [(ngModel)]="newScheduleEntry.startTime" class="form-input w-full p-2 border rounded-md focus:ring focus:ring-blue-200" required>
+            </div>
+            <div class="form-group">
+              <label for="scheduleEndTime" class="form-label block text-sm font-medium text-gray-700">Fin</label>
+              <input type="time" id="scheduleEndTime" [(ngModel)]="newScheduleEntry.endTime" class="form-input w-full p-2 border rounded-md focus:ring focus:ring-blue-200" required>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group flex space-x-4 mt-6">
+            <button type="button" class="add-btn bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="addScheduleEntry()">
+              <i class="fas fa-plus mr-2"></i> Ajouter
+            </button>
+            <button type="button" class="save-btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" (click)="saveSchedule()">
+              <i class="fas fa-save mr-2"></i> Enregistrer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

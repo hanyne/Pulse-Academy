@@ -1,0 +1,283 @@
+/* register.component.css */
+
+/* Full page layout */
+.register-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+  }
+  
+  /* Left Section: Image with Overlay */
+  .register-image {
+    flex: 1;
+    background-image: url('../../../assets/img/education.jpg'); /* Replace with your education-themed image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  
+  .register-image .overlay {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.2) 50%, transparent); /* Gradient overlay */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content towards the top */
+    padding-top: 100px; /* Position slightly higher, matching the login page */
+  }
+  
+  .register-image h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: -10px; /* Fine-tune position */
+  }
+  
+  .register-image p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 5px;
+  }
+  
+  /* Right Section: Form Container */
+  .register-form-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  /* Modern Form Styling */
+  .form-wrapper {
+    max-width: 400px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Slight transparency for glassmorphism */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    padding: 40px; /* Increased padding for a more spacious look */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .form-wrapper h2 {
+    font-size: 2.2rem; /* Slightly larger title */
+    color: #1a1a1a; /* Darker color for contrast */
+    margin-bottom: 30px; /* More spacing below the title */
+    position: relative;
+    display: inline-block;
+  }
+  
+  .form-wrapper h2::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: #007bff;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased spacing between form elements */
+  }
+  
+  /* Form Group and Input Styling */
+  .form-group {
+    text-align: left;
+    position: relative;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    background-color: #f8f9fa; /* Light background for inputs */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .input-wrapper:hover {
+    background-color: #e9ecef; /* Slightly darker on hover */
+  }
+  
+  .input-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+  }
+  
+  .input-wrapper:hover i {
+    color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .form-control {
+    width: 100%;
+    background: transparent; /* Transparent background to show the input-wrapper's background */
+    border: none; /* Remove default border */
+    border-bottom: 2px solid #007bff; /* Underline effect */
+    border-radius: 0; /* Remove default border-radius */
+    padding: 12px 12px 12px 45px; /* Adjusted padding for larger icon */
+    font-size: 1.1rem; /* Slightly larger font */
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-bottom-color: #0056b3; /* Darker blue on focus */
+    box-shadow: none; /* Remove default shadow */
+    background: rgba(0, 123, 255, 0.05); /* Subtle background tint on focus */
+    outline: none;
+  }
+  
+  /* Placeholder Styling */
+  .form-control::placeholder {
+    color: #999;
+    font-style: italic;
+    transition: opacity 0.3s ease;
+  }
+  
+  .form-control:focus::placeholder {
+    opacity: 0; /* Hide placeholder on focus */
+  }
+  
+  /* Error Messages */
+  .error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    background: rgba(220, 53, 69, 0.1); /* Light red background for errors */
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+    text-align: left;
+  }
+  
+  /* Submit Button */
+  .btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
+    border: none;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 25px; /* Rounded button */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Glowing shadow */
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #003d82); /* Darker gradient on hover */
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5); /* Enhanced glow on hover */
+    transform: translateY(-3px); /* Slightly more lift */
+  }
+  
+  .btn-primary:active {
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2); /* Reduced shadow on click */
+    transform: translateY(0);
+  }
+  
+  .btn-primary[disabled] {
+    background: #cccccc;
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+  
+  /* Register Link */
+  .register-link {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  
+  .register-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .register-link a:hover::after {
+    width: 100%; /* Underline effect on hover */
+  }
+  
+  .register-link a:hover {
+    color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .register-page {
+      flex-direction: column;
+    }
+  
+    .register-image {
+      height: 200px;
+    }
+  
+    .register-image h1 {
+      font-size: 1.5rem;
+      margin-top: -5px;
+    }
+  
+    .register-image p {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+  
+    .register-image .overlay {
+      padding-top: 20px; /* Adjust padding for smaller screens */
+    }
+  
+    .register-form-container {
+      padding: 20px;
+    }
+  
+    .form-wrapper {
+      padding: 25px; /* Reduced padding for smaller screens */
+    }
+  
+    .form-wrapper h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+  
+    .form-control {
+      font-size: 1rem;
+      padding: 10px 10px 10px 40px;
+    }
+  
+    .btn-primary {
+      padding: 12px;
+      font-size: 1rem;
+    }
+  }

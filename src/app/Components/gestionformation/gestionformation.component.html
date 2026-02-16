@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Formations</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="flex min-h-screen">
+    <!-- Sidebar (Restored to Original with White Links, No Underline) -->
+    <div class="w-64 bg-gray-800 text-white fixed h-full p-6">
+      <a routerLink="dash" class="block text-center mb-8">
+        <h1 class="text-2xl font-bold"><i class="fa fa-book-reader mr-2"></i>Pulse Academy</h1>
+      </a>
+      <nav class="space-y-2">
+        <a routerLink="/dash" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition text-white no-underline" title="Tableau de Bord">
+          <i class="fas fa-tachometer-alt mr-2"></i>Tableau de Bord
+        </a>
+        <a routerLink="/admin/course" class="block py-2 px-4 rounded-lg bg-gray-700 text-white no-underline" title="Formations">
+          <i class="fas fa-chalkboard-teacher mr-2"></i>Formations
+        </a>
+        <a routerLink="/admin/users" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition text-white no-underline" title="Utilisateurs">
+          <i class="fas fa-users mr-2"></i>Utilisateurs
+        </a>
+        <a routerLink="/admin/messages" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition text-white no-underline" title="Messages">
+          <i class="fas fa-envelope mr-2"></i>Messages
+        </a>
+        <a routerLink="/admin/review" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition text-white no-underline" title="Avis Clients">
+          <i class="fas fa-star mr-2"></i>Avis Clients
+        </a>
+        <a href="#" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition text-white no-underline" (click)="logout()" title="Déconnexion">
+          <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+        </a>
+      </nav>
+    </div>
+     <div class="contraine">
+    <!-- Main Content -->
+    <div class="flex-1 ml-64 p-8">
+      <!-- Topbar -->
+      <div class="bg-white shadow-lg rounded-xl p-6 mb-8 flex justify-between items-center">
+        <h2 class="text-3xl font-bold text-gray-900">Gestion des Formations</h2>
+        <div class="flex items-center space-x-4">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Admin" class="w-12 h-12 rounded-full">
+          <span class="text-gray-700 font-medium">Admin</span>
+        </div>
+      </div>
+
+      <!-- Courses Card -->
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+        <div class="p-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white flex justify-between items-center">
+          <h3 class="text-xl font-semibold">Liste des Formations</h3>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center transition duration-200" (click)="openCreateModal()">
+            <i class="fas fa-plus mr-2"></i> Ajouter une Formation
+          </button>
+        </div>
+        <div class="p-6">
+          <!-- Messages -->
+          <div *ngIf="successMessage" class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg">{{ successMessage }}</div>
+          <div *ngIf="errorMessage" class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg">{{ errorMessage }}</div>
+
+          <!-- Courses Table -->
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 modern-table">
+              <thead class="bg-indigo-100">
+                <tr>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Titre</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Description</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Formateur</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Durée</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Prix</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Image</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr *ngFor="let course of courses" class="hover:bg-indigo-50 transition duration-200">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ course.title }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ course.description }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <ng-container *ngIf="course.instructor; else noInstructor">
+                      {{ course.instructor.firstName }} {{ course.instructor.lastName }} ({{ course.instructor.email }})
+                    </ng-container>
+                    <ng-template #noInstructor>
+                      <span class="text-red-600">Formateur non trouvé</span>
+                    </ng-template>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ course.duration || 'N/A' }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ course.price ? course.price + ' TND' : 'N/A' }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <div *ngIf="course.image; else noImage" class="image-container">
+                      <img [src]="getImageUrl(course.image)" alt="Course Image" class="object-cover rounded" (error)="onImageError($event)">
+                    </div>
+                    <ng-template #noImage>
+                      <span class="no-image">Aucune image</span>
+                    </ng-template>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                    <button class="action-btn bg-green-500 hover:bg-green-600 text-white" (click)="manageEnrollments(course._id)" [disabled]="!course._id" title="Gérer les inscriptions">
+                      <i class="fas fa-users mr-2"></i> Inscriptions
+                    </button>
+                    <button class="action-btn bg-yellow-500 hover:bg-yellow-600 text-white" (click)="viewSchedule(course._id)" [disabled]="!course._id" title="Voir le planning">
+                      <i class="fas fa-calendar-alt mr-2"></i> Planning
+                    </button>
+                    <button class="action-btn bg-blue-500 hover:bg-blue-600 text-white" (click)="openEditModal(course)" [disabled]="!course._id" title="Modifier la formation">
+                      <i class="fas fa-edit mr-2"></i> Modifier
+                    </button>
+                    <button class="action-btn bg-red-500 hover:bg-red-600 text-white" (click)="deleteCourse(course._id!)" [disabled]="!course._id" title="Supprimer la formation">
+                      <i class="fas fa-trash mr-2"></i> Supprimer
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="courses.length === 0">
+                  <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">Aucune formation trouvée.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Course Modal -->
+      <!-- Create Course Modal - Version Moderne -->
+<!-- Create Course Modal - Version Simple & Blanche -->
+<div class="modal fade" id="createCourseModal" tabindex="-1" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content rounded-2xl overflow-hidden border-0 shadow-xl bg-white">
+
+      <!-- Header - Blanc simple -->
+      <div class="modal-header bg-white text-gray-900 px-8 py-6 border-b">
+        <h5 class="modal-title text-2xl font-bold flex items-center gap-3" id="createCourseModalLabel">
+          <i class="fas fa-plus-circle text-indigo-600 text-3xl"></i>
+          Nouvelle Formation
+        </h5>
+        <button type="button" class="text-gray-500 hover:text-gray-700 transition" (click)="closeModal('createCourseModal')">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Body - Blanc -->
+      <div class="modal-body p-8 lg:p-10 bg-white">
+        <form #createForm="ngForm" (ngSubmit)="createCourse()" class="space-y-8">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Titre -->
+            <div class="form-floating relative">
+              <input type="text" id="createTitle" class="form-control peer" 
+                     [(ngModel)]="newCourse.title" name="title" required #title="ngModel"
+                     placeholder="Titre de la formation">
+              <label for="createTitle" class="floating-label">Titre <span class="text-red-500">*</span></label>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-red-600 text-sm mt-1">
+                Le titre est obligatoire
+              </div>
+            </div>
+
+            <!-- Formateur -->
+            <div class="form-floating relative">
+              <select id="createInstructor" class="form-select peer" 
+                      [(ngModel)]="newCourse.instructor._id" name="instructor" required #instructor="ngModel">
+                <option value="" disabled>Sélectionnez un formateur</option>
+                <option *ngFor="let inst of instructors" [value]="inst._id">
+                  {{ inst.firstName }} {{ inst.lastName }} • {{ inst.email }}
+                </option>
+              </select>
+              <label for="createInstructor" class="floating-label">Formateur <span class="text-red-500">*</span></label>
+              <div *ngIf="instructor.invalid && (instructor.dirty || instructor.touched)" class="text-red-600 text-sm mt-1">
+                Veuillez choisir un formateur
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="md:col-span-2 form-floating relative">
+              <textarea id="createDescription" class="form-control peer h-32 resize-none" 
+                        [(ngModel)]="newCourse.description" name="description" required #desc="ngModel"
+                        placeholder="Décrivez la formation..."></textarea>
+              <label for="createDescription" class="floating-label">Description <span class="text-red-500">*</span></label>
+              <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="text-red-600 text-sm mt-1">
+                La description est requise
+              </div>
+            </div>
+
+            <!-- Durée & Prix -->
+            <div class="form-floating relative">
+              <input type="text" id="createDuration" class="form-control peer" 
+                     [(ngModel)]="newCourse.duration" name="duration" placeholder="ex: 8 semaines">
+              <label for="createDuration" class="floating-label">Durée</label>
+            </div>
+
+            <div class="form-floating relative">
+              <input type="number" id="createPrice" class="form-control peer" 
+                     [(ngModel)]="newCourse.price" name="price" min="0" step="0.01" placeholder="0.00">
+              <label for="createPrice" class="floating-label">Prix (TND)</label>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Image de couverture</label>
+              <div class="flex items-center gap-6">
+                <div class="relative w-40 h-40 rounded-2xl overflow-hidden shadow-md bg-gray-100 border-2 border-dashed border-gray-300 group">
+                  <img *ngIf="newCourseImagePreview" [src]="newCourseImagePreview" alt="Prévisualisation" class="w-full h-full object-cover">
+                  <div *ngIf="!newCourseImagePreview" class="w-full h-full flex items-center justify-center">
+                    <i class="fas fa-image text-5xl text-gray-400"></i>
+                  </div>
+                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <label for="createImage" class="cursor-pointer text-white text-sm font-medium px-4 py-2 bg-indigo-600 rounded-full hover:bg-indigo-700">
+                      Choisir une image
+                    </label>
+                  </div>
+                </div>
+                <input type="file" id="createImage" class="hidden" (change)="onFileSelected($event, 'newCourse')" accept="image/*">
+              </div>
+            </div>
+          </div>
+
+          <!-- Bouton soumission - Simple & Blanc -->
+          <div class="mt-10 flex justify-end">
+            <button type="submit" class="px-10 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:bg-indigo-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    [disabled]="createForm.invalid">
+              <i class="fas fa-save mr-2"></i> Créer la formation
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Course Modal - Version Simple & Blanche -->
+<div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content rounded-2xl overflow-hidden border-0 shadow-xl bg-white">
+
+      <!-- Header - Blanc simple -->
+      <div class="modal-header bg-white text-gray-900 px-8 py-6 border-b">
+        <h5 class="modal-title text-2xl font-bold flex items-center gap-3" id="editCourseModalLabel">
+          <i class="fas fa-edit text-indigo-600 text-3xl"></i>
+          Modifier la Formation
+        </h5>
+        <button type="button" class="text-gray-500 hover:text-gray-700 transition" (click)="closeModal('editCourseModal')">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Body - Blanc -->
+      <div class="modal-body p-8 lg:p-10 bg-white">
+        <form #editForm="ngForm" (ngSubmit)="updateCourse()" class="space-y-8">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Titre -->
+            <div class="form-floating relative">
+              <input type="text" id="editTitle" class="form-control peer" 
+                     [(ngModel)]="selectedCourse.title" name="title" required>
+              <label for="editTitle" class="floating-label">Titre <span class="text-red-500">*</span></label>
+            </div>
+
+            <!-- Formateur -->
+            <div class="form-floating relative">
+              <select id="editInstructor" class="form-select peer" 
+                      [(ngModel)]="selectedCourse.instructor._id" name="instructor" required>
+                <option value="" disabled>Sélectionnez un formateur</option>
+                <option *ngFor="let inst of instructors" [value]="inst._id">
+                  {{ inst.firstName }} {{ inst.lastName }} • {{ inst.email }}
+                </option>
+              </select>
+              <label for="editInstructor" class="floating-label">Formateur <span class="text-red-500">*</span></label>
+            </div>
+
+            <!-- Description -->
+            <div class="md:col-span-2 form-floating relative">
+              <textarea id="editDescription" class="form-control peer h-32 resize-none" 
+                        [(ngModel)]="selectedCourse.description" name="description" required></textarea>
+              <label for="editDescription" class="floating-label">Description <span class="text-red-500">*</span></label>
+            </div>
+
+            <!-- Durée -->
+            <div class="form-floating relative">
+              <input type="text" id="editDuration" class="form-control peer" 
+                     [(ngModel)]="selectedCourse.duration" name="duration" placeholder="ex: 8 semaines">
+              <label for="editDuration" class="floating-label">Durée</label>
+            </div>
+
+            <!-- Prix -->
+            <div class="form-floating relative">
+              <input type="number" id="editPrice" class="form-control peer" 
+                     [(ngModel)]="selectedCourse.price" name="price" min="0" step="0.01" placeholder="0.00">
+              <label for="editPrice" class="floating-label">Prix (TND)</label>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Image de couverture</label>
+              <div class="flex flex-col md:flex-row items-start gap-6">
+                <!-- Preview / Image actuelle -->
+                <div class="relative w-48 h-48 rounded-2xl overflow-hidden shadow-md bg-gray-100 border-2 border-dashed border-gray-300 group">
+                  <!-- Prévisualisation nouvelle image -->
+                  <img *ngIf="selectedCourseImagePreview" [src]="selectedCourseImagePreview" alt="Prévisualisation" 
+                       class="w-full h-full object-cover">
+                  
+                  <!-- Image actuelle si pas de nouvelle prévisualisation -->
+                  <img *ngIf="!selectedCourseImagePreview && selectedCourse.image" 
+                       [src]="getImageUrl(selectedCourse.image)" alt="Image actuelle" 
+                       class="w-full h-full object-cover">
+                  
+                  <!-- Placeholder si aucune image -->
+                  <div *ngIf="!selectedCourseImagePreview && !selectedCourse.image" 
+                       class="w-full h-full flex items-center justify-center">
+                    <i class="fas fa-image text-5xl text-gray-400"></i>
+                  </div>
+
+                  <!-- Overlay au survol -->
+                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <label for="editImage" class="cursor-pointer text-white text-sm font-medium px-5 py-3 bg-indigo-600 rounded-full hover:bg-indigo-700">
+                      Changer l'image
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Input file caché -->
+                <input type="file" id="editImage" class="hidden" (change)="onFileSelected($event, 'selectedCourse')" accept="image/*">
+              </div>
+            </div>
+          </div>
+
+          <!-- Bouton soumission - Simple indigo solide -->
+          <div class="mt-10 flex justify-end gap-4">
+            <button type="button" class="px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-xl hover:bg-gray-300 transition"
+                    (click)="closeModal('editCourseModal')">
+              Annuler
+            </button>
+            
+            <button type="submit" class="px-10 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:bg-indigo-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    [disabled]="editForm.invalid">
+              <i class="fas fa-save mr-2"></i> Enregistrer les modifications
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

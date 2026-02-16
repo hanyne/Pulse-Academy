@@ -1,0 +1,142 @@
+/* Import Google Fonts for modern typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Section background with subtle gradient animation */
+.enrollment-section {
+    background: linear-gradient(135deg, #e0e7ff, #e9d5ff);
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism effect for cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient header for course title */
+.gradient-header {
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Course image styling */
+.course-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Modern input styling with animated underline */
+.modern-input {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.modern-input input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 0.5rem 0;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.modern-input input:focus {
+    outline: none;
+    border-bottom: 2px solid transparent;
+}
+
+.modern-input .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    transition: width 0.4s ease;
+}
+
+.modern-input input:focus ~ .underline {
+    width: 100%;
+}
+
+.modern-input label {
+    display: block;
+    color: #999;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Neon button styling with glow effect */
+.neon-btn {
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+.neon-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.8);
+    background: linear-gradient(45deg, #00d4ff, #007bff);
+}
+
+.neon-btn.secondary {
+    background: linear-gradient(45deg, #6c757d, #adb5bd);
+    box-shadow: 0 0 15px rgba(108, 117, 125, 0.5);
+}
+
+.neon-btn.secondary:hover {
+    box-shadow: 0 0 25px rgba(108, 117, 125, 0.8);
+    background: linear-gradient(45deg, #adb5bd, #6c757d);
+}
+
+.neon-btn:disabled {
+    background: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Error and success message styling */
+.alert {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Adjust text for modern typography */
+.course-title {
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.text-muted {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.text-danger {
+    font-size: 0.85rem;
+    font-weight: 500;
+}

@@ -1,0 +1,179 @@
+/* === Topbar === */
+.topbar {
+  background: linear-gradient(to right, #1e3a8a, #4f46e5);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 5px 0;
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* === Header Section === */
+.header-section {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?fit=crop&w=1950&q=80') center/cover no-repeat;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.header-section .glass-bg {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.header-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.header-section p {
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+/* === Course Details === */
+.course-details {
+  padding: 40px 20px;
+  background: #f9f9f9;
+}
+
+.course-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.course-meta p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.course-meta i {
+  color: #007bff;
+  margin-right: 8px;
+}
+
+/* === Highlights List === */
+.course-highlights {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.course-highlights li {
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.course-highlights i {
+  color: #28a745;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+/* === Enroll Button === */
+.btn-enroll {
+  background-color: #007bff;
+  color: white;
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.btn-enroll:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* === Call to Action === */
+.cta-section {
+  background: #007bff;
+  color: white;
+  padding: 40px 20px;
+  border-radius: 15px;
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.cta-section h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.cta-section p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* === Footer === */
+footer {
+  background: #222;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 40px 0;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer h5 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+/* === Responsive === */
+@media (min-width: 768px) {
+  .course-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .course-highlights {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,177 @@
+<!-- src/app/discounted-enrollment/discounted-enrollment.component.html -->
+
+<div class="enrollment-page">
+  <div class=" py-5">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-9 col-md-12">
+
+        <!-- En-tête du cours -->
+        <div *ngIf="course" class="course-header text-center mb-5">
+          <h1 class="course-title">{{ course.title }}</h1>
+          <div class="course-meta">
+            <span class="meta-item">
+              <i class="fas fa-user-tie me-2"></i>
+              {{ course.instructor?.firstName || '' }} {{ course.instructor?.lastName || 'Formateur' }}
+            </span>
+            <span class="meta-separator">•</span>
+            <span class="meta-item price-info">
+              <del>{{ course.price ? course.price + ' TND' : 'Gratuit' }}</del>
+              <strong class="discounted-price ms-2">
+                {{ course.price ? (course.price * 0.8).toFixed(0) + ' TND' : 'Gratuit' }}
+              </strong>
+              <small class="badge bg-success ms-2">–20%</small>
+            </span>
+          </div>
+        </div>
+
+        <!-- Messages de succès / erreur -->
+        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ successMessage }}
+          <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ errorMessage }}
+          <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+        </div>
+
+        <!-- Carte du formulaire -->
+        <div class="enrollment-card shadow-lg">
+          <div class="card-header text-center">
+            <h3 class="mb-0">Inscription avec réduction 20%</h3>
+            <small class="text-muted">Veuillez remplir les informations ci-dessous</small>
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+            <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()" novalidate>
+              <div class="row g-4">
+
+                <!-- Nom -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="nom" formControlName="nom"
+                           placeholder="Votre nom" [class.is-invalid]="f['nom'].touched && f['nom'].invalid">
+                    <label for="nom">Nom <span class="text-danger">*</span></label>
+                    <div *ngIf="f['nom'].touched && f['nom'].invalid" class="invalid-feedback">
+                      Le nom est requis (minimum 2 caractères)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Prénom -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="prenom" formControlName="prenom"
+                           placeholder="Votre prénom" [class.is-invalid]="f['prenom'].touched && f['prenom'].invalid">
+                    <label for="prenom">Prénom <span class="text-danger">*</span></label>
+                    <div *ngIf="f['prenom'].touched && f['prenom'].invalid" class="invalid-feedback">
+                      Le prénom est requis (minimum 2 caractères)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="email" formControlName="email"
+                           placeholder="votre@email.com" [class.is-invalid]="f['email'].touched && f['email'].invalid">
+                    <label for="email">Email <span class="text-danger">*</span></label>
+                    <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
+                      Veuillez entrer un email valide
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="tel" class="form-control" id="telephone" formControlName="telephone"
+                           placeholder="Votre téléphone" [class.is-invalid]="f['telephone'].touched && f['telephone'].invalid">
+                    <label for="telephone">Téléphone</label>
+                    <div *ngIf="f['telephone'].touched && f['telephone'].invalid" class="invalid-feedback">
+                      Format invalide (8 chiffres attendus)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CIN -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="cin" formControlName="cin"
+                           placeholder="XXXXXXXX" maxlength="8" [class.is-invalid]="f['cin'].touched && f['cin'].invalid">
+                    <label for="cin">CIN <span class="text-danger">*</span></label>
+                    <div *ngIf="f['cin'].touched && f['cin'].invalid" class="invalid-feedback">
+                      Le CIN doit contenir exactement 8 chiffres
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Adresse -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="adresse" formControlName="adresse"
+                           placeholder="Votre adresse complète" [class.is-invalid]="f['adresse'].touched && f['adresse'].invalid">
+                    <label for="adresse">Adresse <span class="text-danger">*</span></label>
+                    <div *ngIf="f['adresse'].touched && f['adresse'].invalid" class="invalid-feedback">
+                      L'adresse doit contenir entre 5 et 100 caractères
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Niveau d'étude -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <select class="form-select" id="niveauEtude" formControlName="niveauEtude"
+                            [class.is-invalid]="f['niveauEtude'].touched && f['niveauEtude'].invalid">
+                      <option value="" disabled>Sélectionnez...</option>
+                      <option value="Bac">Bac</option>
+                      <option value="Licence">Licence</option>
+                      <option value="Master">Master</option>
+                      <option value="Doctorat">Doctorat</option>
+                      <option value="Autre">Autre</option>
+                    </select>
+                    <label for="niveauEtude">Niveau d'étude <span class="text-danger">*</span></label>
+                    <div *ngIf="f['niveauEtude'].touched && f['niveauEtude'].invalid" class="invalid-feedback">
+                      Le niveau d'étude est requis
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sélection de la formation -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <select class="form-select" id="courseId" formControlName="courseId"
+                            [class.is-invalid]="f['courseId'].touched && f['courseId'].invalid">
+                      <option value="" disabled>Choisir une formation</option>
+                      <option *ngFor="let c of courses" [value]="c._id">{{ c.title }}</option>
+                    </select>
+                    <label for="courseId">Formation <span class="text-danger">*</span></label>
+                    <div *ngIf="f['courseId'].touched && f['courseId'].invalid" class="invalid-feedback">
+                      Veuillez sélectionner une formation
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Boutons d'action -->
+              <div class="d-flex justify-content-center gap-4 mt-5">
+                <button type="submit" class="btn btn-primary btn-lg px-5 modern-submit-btn"
+                        [disabled]="enrollmentForm.invalid || isSubmitting">
+                  <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
+                  {{ isSubmitting ? 'Inscription en cours...' : 'Confirmer l\'inscription (-20%)' }}
+                </button>
+
+                <button type="button" class="btn btn-outline-secondary btn-lg px-5"
+                        (click)="cancel()">
+                  Annuler
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

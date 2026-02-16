@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Demandes</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="w-64 bg-gray-800 text-white fixed h-full p-6">
+      <a href="dash" class="block text-center mb-8">
+        <h1 class="text-2xl font-bold"><i class="fa fa-book-reader mr-2"></i>Pulse Academy</h1>
+      </a>
+      <nav class="space-y-2">
+        <a href="dash" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition"><i class="fas fa-tachometer-alt mr-2"></i>Tableau de Bord</a>
+        <a href="admin/course" class="block py-2 px-4 rounded-lg bg-gray-700"><i class="fas fa-chalkboard-teacher mr-2"></i>Formations</a>
+        <a href="admin/users" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition"><i class="fas fa-users mr-2"></i>Utilisateurs</a>
+        <a href="admin/messages" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition"><i class="fas fa-envelope mr-2"></i>Messages</a>
+        <a href="admin/review" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition"><i class="fas fa-star mr-2"></i>Avis Clients</a>
+        <a href="#" class="block py-2 px-4 rounded-lg hover:bg-gray-700 transition" (click)="logout()"><i class="fas fa-sign-out-alt mr-2"></i>Déconnexion</a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-64 p-4 sm:p-8">
+      <!-- Topbar -->
+      <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-center">
+        <h2 class="text-xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-0">Gestion des Demandes - {{ selectedCourseTitle }}</h2>
+        <div class="flex items-center">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Admin" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3">
+          <span class="text-gray-700 font-medium">Admin</span>
+        </div>
+      </div>
+
+      <!-- Demands Card -->
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+        <div class="p-4 sm:p-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
+          <h3 class="text-lg sm:text-xl font-semibold">Liste des Demandes d'Inscription</h3>
+        </div>
+        <div class="p-4 sm:p-6">
+          <!-- Error Message -->
+          <div *ngIf="error" class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg">{{ error }}</div>
+
+          <!-- Search Input -->
+          <div class="mb-6">
+            <label for="search" class="block text-sm font-medium text-gray-700">Rechercher par nom ou prénom</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input type="text" id="search" [(ngModel)]="searchTerm" (input)="searchEnrollments()"
+                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-4 sm:text-sm border-gray-300 rounded-md"
+                     placeholder="Entrez un nom ou prénom">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Demands Table -->
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nom</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Prénom</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Téléphone</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date d'Inscription</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Statut</th>
+                  <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr *ngFor="let enrollment of filteredEnrollments" class="hover:bg-gray-50 transition">
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ enrollment.nom }}</td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ enrollment.prenom }}</td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-normal text-sm text-gray-900 break-all">{{ enrollment.email }}</td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ enrollment.telephone || 'N/A' }}</td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ enrollment.enrollmentDate | date:'short' }}</td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm">
+                    <span class="px-2 sm:px-3 py-1 inline-flex text-xs font-semibold rounded-full"
+                          [ngClass]="{
+                            'bg-yellow-100 text-yellow-800': enrollment.status === 'en attente',
+                            'bg-blue-100 text-blue-800': enrollment.status === 'confirme',
+                            'bg-green-100 text-green-800': enrollment.status === 'paye',
+                            'bg-red-100 text-red-800': enrollment.status === 'refuse'
+                          }">
+                      {{ enrollment.status }}
+                    </span>
+                  </td>
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                    <button *ngIf="enrollment.status === 'en attente'"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full flex items-center text-xs"
+                            (click)="updateStatus(enrollment._id, 'confirme')">
+                      <i class="fas fa-check mr-1 sm:mr-2"></i> Confirmer
+                    </button>
+                    <button *ngIf="enrollment.status === 'en attente' || enrollment.status === 'confirme'"
+                            class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full flex items-center text-xs"
+                            (click)="updateStatus(enrollment._id, 'paye')">
+                      <i class="fas fa-money-check-alt mr-1 sm:mr-2"></i> Marquer Payé
+                    </button>
+                    <button *ngIf="enrollment.status === 'en attente'"
+                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full flex items-center text-xs"
+                            (click)="updateStatus(enrollment._id, 'refuse')">
+                      <i class="fas fa-times mr-1 sm:mr-2"></i> Refuser
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

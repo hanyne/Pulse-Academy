@@ -1,0 +1,79 @@
+<!-- register.component.html -->
+<div class="register-page">
+    <!-- Left Section: Image with Overlay -->
+    <div class="register-image">
+      <div class="overlay">
+        <h1>Pulse Academy</h1>
+        <p>Rejoignez notre centre de formation pour un avenir brillant</p>
+      </div>
+    </div>
+  
+    <!-- Right Section: Register Form -->
+    <div class="register-form-container">
+      <div class="form-wrapper">
+        <h2>Inscription - Pulse Academy</h2>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="register-form">
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="email" 
+                #emailControl="ngModel"
+                class="form-control"
+                required 
+                email
+                placeholder="Entrez votre email">
+            </div>
+            <div class="error" *ngIf="registerForm.submitted && emailControl.errors?.['required']">
+              L'email est requis
+            </div>
+            <div class="error" *ngIf="registerForm.submitted && emailControl.errors?.['email']">
+              Email invalide
+            </div>
+          </div>
+  
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                [(ngModel)]="password" 
+                #passwordControl="ngModel"
+                class="form-control"
+                required
+                minlength="6"
+                placeholder="Entrez votre mot de passe">
+            </div>
+            <div class="error" *ngIf="registerForm.submitted && passwordControl.errors?.['required']">
+              Le mot de passe est requis
+            </div>
+            <div class="error" *ngIf="registerForm.submitted && passwordControl.errors?.['minlength']">
+              Minimum 6 caractères
+            </div>
+          </div>
+  
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+            S'inscrire
+          </button>
+  
+          <!-- Link to Login -->
+          <p class="register-link">
+            Déjà inscrit? <a routerLink="/login">Connectez-vous</a>
+          </p>
+  
+          <!-- Error Message -->
+          <div class="error" *ngIf="error">{{ error }}</div>
+        </form>
+      </div>
+    </div>
+  </div>

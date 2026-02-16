@@ -1,0 +1,152 @@
+<!-- Topbar Start -->
+<div class="container-fluid bg-dark">
+    <div class="row py-2 px-lg-5">
+      <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+        <div class="d-inline-flex align-items-center text-white">
+          <small><i class="fa fa-phone-alt mr-2"></i>+216 58 837 712</small>
+          <small class="px-3">|</small>
+          <small><i class="fa fa-envelope mr-2"></i>contact@pulseacademy.com</small>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center text-lg-right">
+        <div class="d-inline-flex align-items-center">
+          <a class="text-white px-2" href="">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<app-navbar></app-navbar>
+<!-- Navbar End -->
+
+<!-- Header Start -->
+<div class="header-section position-relative">
+  <div class="container text-center py-5">
+    <h1 class="text-white display-4 mb-4">Détails de la Formation</h1>
+    <div class="d-flex justify-content-center text-white mb-5">
+      <p class="m-0 text-uppercase"><a class="text-white" routerLink="/">Home</a></p>
+      <span class="px-2">/</span>
+      <p class="m-0 text-uppercase"><a class="text-white" routerLink="/courses">Courses</a></p>
+      <span class="px-2">/</span>
+      <p class="m-0 text-uppercase">Détails</p>
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Course Detail Start -->
+<div class="container-fluid py-5 bg-light">
+  <div class="container py-5">
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+      <p>Chargement des détails de la formation...</p>
+    </div>
+
+    <!-- Course Content -->
+    <div *ngIf="course && !isLoading">
+      <!-- Course Overview -->
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="course-image">
+            <img [src]="getCourseImageUrl(course.image)" alt="{{course.title}}" class="img-fluid rounded">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="course-details">
+            <h2 class="course-title">{{ course.title }}</h2>
+            <div class="course-meta mb-4">
+              <p>
+                <i class="fas fa-user me-2 text-primary"></i> Formateur: 
+                <ng-container *ngIf="course.instructor; else noInstructor">
+                  {{ course.instructor.firstName }} {{ course.instructor.lastName }}
+                </ng-container>
+                <ng-template #noInstructor>
+                  <span class="text-danger">Formateur non spécifié</span>
+                </ng-template>
+              </p>
+              <p><i class="fas fa-clock me-2 text-primary"></i> Durée: {{ course.duration || 'Non spécifiée' }}</p>
+              <p><i class="fas fa-money-bill-wave me-2 text-primary"></i> Prix: {{ course.price ? course.price + ' TND' : 'Gratuit' }}</p>
+              <p><i class="fas fa-star me-2 text-primary"></i> Évaluation: {{ course.rating || 'Aucune' }} <small>(250 avis)</small></p>
+              <p><i class="fas fa-calendar me-2 text-primary"></i> Créé le: {{ course.createdAt | date:'mediumDate' }}</p>
+            </div>
+            <button class="btn btn-primary btn-enroll" (click)="enrollInCourse()">S'inscrire</button>
+            <p class="text-muted mt-2"><small>* Inscription nécessite CIN, adresse, et niveau d'étude.</small></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Description -->
+      <div class="course-section mb-5">
+        <h3 class="section-heading">Description de la Formation</h3>
+        <p class="course-description">{{ course.description || 'Aucune description disponible.' }}</p>
+      </div>
+
+      <!-- Course Schedule -->
+      <div class="course-section mb-5" *ngIf="course.schedule && course.schedule.length > 0">
+        <h3 class="section-heading">Planning</h3>
+        <ul class="course-schedule">
+          <li *ngFor="let session of course.schedule">
+            <i class="fas fa-calendar-day me-2 text-primary"></i>
+            {{ session.day }}: {{ session.startTime }} - {{ session.endTime }}
+            <span *ngIf="session.date"> ({{ session.date }})</span>
+          </li>
+        </ul>
+      </div>
+      <div class="course-section mb-5" *ngIf="!course.schedule || course.schedule.length === 0">
+        <h3 class="section-heading">Planning</h3>
+        <p>Aucun planning disponible.</p>
+      </div>
+
+      <!-- Course Highlights -->
+      <div class="course-section mb-5">
+        <h3 class="section-heading">Points Forts de la Formation</h3>
+        <ul class="course-highlights">
+          <li><i class="fas fa-check me-2 text-primary"></i> Apprentissage pratique avec des projets réels</li>
+          <li><i class="fas fa-check me-2 text-primary"></i> Support personnalisé par des experts</li>
+          <li><i class="fas fa-check me-2 text-primary"></i> Accès à vie aux ressources du cours</li>
+          <li><i class="fas fa-check me-2 text-primary"></i> Certificat de complétion à la fin</li>
+        </ul>
+      </div>
+
+      <!-- Instructor Bio -->
+      <div class="course-section mb-5">
+        <h3 class="section-heading">À Propos du Formateur</h3>
+        <div class="instructor-bio">
+          <h5>
+            <ng-container *ngIf="course.instructor; else noInstructorBio">
+              {{ course.instructor.firstName }} {{ course.instructor.lastName }}
+            </ng-container>
+            <ng-template #noInstructorBio>
+              <span class="text-danger">Formateur non spécifié</span>
+            </ng-template>
+          </h5>
+          <p>
+            <ng-container *ngIf="course.instructor && course.instructor.bio; else noInstructorBioDesc">
+              {{ course.instructor.bio }}
+            </ng-container>
+            <ng-template #noInstructorBioDesc>
+              Aucune information disponible sur le formateur.
+            </ng-template>
+          </p>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="cta-section text-center">
+        <h3 class="mb-4">Prêt à Commencer Votre Apprentissage ?</h3>
+        <button class="btn btn-primary btn-enroll btn-lg" (click)="enrollInCourse()">S'inscrire Maintenant</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Course Detail End -->

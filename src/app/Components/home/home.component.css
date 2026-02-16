@@ -1,0 +1,116 @@
+/* src/app/home/home.component.css */
+.review-item {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .review-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .star-rating i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+  }a
+  
+  .owl-carousel .owl-item .review-item {
+    margin: 15px;
+  }
+  
+  .animate__animated.animate__fadeIn {
+    --animate-duration: 1s;
+  }
+  
+  .animate__animated.animate__fadeInUp {
+    --animate-duration: 1s;
+  }
+  
+  /* Ensure form inputs are styled consistently */
+  .form-control {
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .btn-primary {
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  /* reviews-section.component.css */
+
+.reviews-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+/* Carte formulaire */
+.review-form-card .card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.review-form-card .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12) !important;
+}
+
+/* Étoiles interactives */
+.star-rating-input .star {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.star-rating-input .star:hover {
+  transform: scale(1.2);
+}
+
+/* Carte avis */
+.review-card {
+  border-radius: 1.25rem;
+  background: white;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.review-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.18);
+}
+
+/* Bouton soumission */
+.btn-primary.rounded-pill {
+  padding: 0.85rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.35);
+}
+
+/* Empty state */
+.empty-state {
+  padding: 4rem 1rem;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 1.5rem;
+  border: 2px dashed #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-form-card .card-body {
+    padding: 2rem !important;
+  }
+  .review-card {
+    margin-bottom: 1.5rem;
+  }
+}

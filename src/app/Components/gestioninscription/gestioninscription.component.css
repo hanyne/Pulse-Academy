@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+td, th {
+  min-width: 120px;
+}
+
+@media (max-width: 640px) {
+  td, th {
+    min-width: 100px;
+    font-size: 0.75rem;
+  }
+}

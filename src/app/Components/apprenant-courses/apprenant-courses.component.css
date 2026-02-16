@@ -1,0 +1,28 @@
+
+
+/* apprenant-courses.component.css */
+.modern-table th {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.modern-table td {
+  font-size: 0.875rem;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.image-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.no-image {
+  color: #6b7280;
+}

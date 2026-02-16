@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Contact - Pulse Academy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Contact Pulse Academy, Formation professionnelle" name="keywords">
+    <meta content="Contactez Pulse Academy pour toute question sur nos formations en pâtisserie, couture, cosmétique, parfumerie, maintenance et langues." name="description">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Topbar Styling (matching provided) */
+        .container-fluid.bg-dark {
+            background-color: #1a1a1a !important;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        /* Navbar Styling (matching provided) */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Jumbotron (adjusted to remove empty space) */
+        .jumbotron {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0; /* Reduced height, adjustable as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 0; /* Removed margin to eliminate gap */
+        }
+
+        .jumbotron h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron .breadcrumb {
+            background: none;
+            justify-content: center;
+        }
+
+        .jumbotron .breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .jumbotron .breadcrumb a:hover {
+            color: #007bff;
+        }
+
+        .jumbotron .breadcrumb i {
+            color: #fff;
+            margin: 0 10px;
+        }
+
+        /* Contact Section (modernized) */
+        .contact-section {
+            padding: 40px 0; /* Reduced padding to minimize space */
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h6 {
+            display: inline-block;
+            position: relative;
+            text-transform: uppercase;
+            color: #007bff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+
+        .section-title h6::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: #007bff;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .contact-info {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-info .info-item i {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-right: 15px;
+        }
+
+        .contact-info .info-item h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .contact-info .info-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        .contact-form {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .contact-form .form-control {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            border-radius: 0;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+
+        .contact-form textarea {
+            resize: none;
+        }
+
+        .contact-form .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-form .error {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-form .success {
+            color: #28a745;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        /* Map Styling */
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        /* Footer Styling (matching provided) */
+        .overlay-top {
+            position: relative;
+            background-color: #1a1a1a;
+            padding: 40px 0;
+        }
+
+        .overlay-top .navbar-brand h1 {
+            color: #fff;
+        }
+
+        .overlay-top p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .overlay-top h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .overlay-top a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-top a:hover {
+            color: #007bff;
+        }
+
+        .overlay-top .input-group input {
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .overlay-top .input-group .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .overlay-top .input-group .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .border-top {
+            border-color: rgba(256, 256, 256, 0.1) !important;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .jumbotron h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                margin-bottom: 30px;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start (updated with Pulse Academy details) -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+216 58 837 712</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>contact@pulseacademy.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="https://instagram.com/ideal_academy_centre">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <app-navbar></app-navbar>
+    <!-- Navbar End -->
+
+    <!-- Header Start (modernized) -->
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">Contact</h1>
+            <div class="d-inline-flex text-white mb-5 breadcrumb">
+                <p class="m-0 text-uppercase"><a class="text-white" href="/">Accueil</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Contact</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Contact Start (modernized) -->
+    <div class="container-fluid contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h6>Besoin d'Aide ?</h6>
+                <h1>Contactez-nous</h1>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.4988779392656!2d10.101413292512296!3d33.85103184317399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12556e3f864b634f%3A0xdc9df2154f7ac913!2sEcole%20Nationale%20d'Ing%C3%A9nieurs%20de%20Gab%C3%A8s!5e0!3m2!1sfr!2stn!4v1742921492756!5m2!1sfr!2stn" 
+                                width="100%" 
+                                height="450" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="contact-info">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h4>Notre Adresse</h4>
+                                        <p>En face l'ENIG de Gabès</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <div>
+                                        <h4>Appelez-nous</h4>
+                                        <p>+216 58 837 712</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <h4>Contactez-nous par Email</h4>
+                                        <p>contact@pulseacademy.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="contact-form">
+                                <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <input type="text" 
+                                                   class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                                   placeholder="Votre Nom" 
+                                                   name="name" 
+                                                   [(ngModel)]="contact.name" 
+                                                   #nameControl="ngModel" 
+                                                   required>
+                                            <div class="error" *ngIf="contactForm.submitted && nameControl.errors?.['required']">
+                                                Le nom est requis
+                                            </div>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <input type="email" 
+                                                   class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                                   placeholder="Votre Email" 
+                                                   name="email" 
+                                                   [(ngModel)]="contact.email" 
+                                                   #emailControl="ngModel" 
+                                                   required 
+                                                   email>
+                                            <div class="error" *ngIf="contactForm.submitted && emailControl.errors?.['required']">
+                                                L'email est requis
+                                            </div>
+                                            <div class="error" *ngIf="contactForm.submitted && emailControl.errors?.['email']">
+                                                Email invalide
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" 
+                                               class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                               placeholder="Sujet" 
+                                               name="subject" 
+                                               [(ngModel)]="contact.subject" 
+                                               #subjectControl="ngModel" 
+                                               required>
+                                        <div class="error" *ngIf="contactForm.submitted && subjectControl.errors?.['required']">
+                                            Le sujet est requis
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                                  rows="5" 
+                                                  placeholder="Message" 
+                                                  name="message" 
+                                                  [(ngModel)]="contact.message" 
+                                                  #messageControl="ngModel" 
+                                                  required></textarea>
+                                        <div class="error" *ngIf="contactForm.submitted && messageControl.errors?.['required']">
+                                            Le message est requis
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary py-3 px-5" type="submit" [disabled]="contactForm.invalid">Envoyer le message</button>
+                                    </div>
+                                    <div class="success mt-3" *ngIf="successMessage">{{successMessage}}</div>
+                                    <div class="error mt-3" *ngIf="errorMessage">{{errorMessage}}</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+    <!-- Footer Start (updated with Pulse Academy details) -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="/" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Pulse Academy</h1>
+                    </a>
+                    <p class="m-0">Centre de formation privée agréé par l'État sous le numéro 8114619. Nous offrons des formations professionnelles dans divers domaines pour vous aider à atteindre vos objectifs de carrière.</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Votre Adresse Email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">S'inscrire</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Contactez-nous</h3>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Tunis, Tunisie</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+216 58 837 712</p>
+                    <p><i class="fa fa-envelope mr-2"></i>contact@pulseacademy.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="text-white" href="https://instagram.com/ideal_academy_centre"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Nos Formations</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pâtisserie et Cuisine</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Couture et Modélisme</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Formation de Parfum</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Maintenance GSM</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Langues</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Liens Rapides</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Politique de Confidentialité</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Conditions Générales</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQ</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Aide et Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright © <a class="text-white" href="#">Pulse Academy</a>. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <p class="m-0">Conçu par <a class="text-white" href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Basic form submission handling (for demo purposes)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message envoyé avec succès !');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
